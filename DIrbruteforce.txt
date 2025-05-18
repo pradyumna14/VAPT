@@ -1,0 +1,3 @@
+# Direcotry-Brute force:
+
+Directory brute force is a hacking technique used to find hidden or unlisted files and folders on a website by trying many possible names (like /admin, /login, /backup) using a wordlist. It's often done with tools like DirBuster or Gobuster.
