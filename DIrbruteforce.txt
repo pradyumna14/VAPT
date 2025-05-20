@@ -1,3 +1,24 @@
-# Direcotry-Brute force:
+Direcotry-Brute force:
 
-Directory brute force is a hacking technique used to find hidden or unlisted files and folders on a website by trying many possible names (like /admin, /login, /backup) using a wordlist. It's often done with tools like DirBuster or Gobuster.
+Directory brute force is a hacking technique used to find hidden or unlisted files and folders on a website by trying many possible names (like /admin, /login, /backup) using a wordlist. It's often done with tools like ffuf, Dirsearch, DirBuster or Gobuster.
+
+
+ffuf -w wordlist.txt -u example.com/fuzz -mc 200
+
+Here are common ffuf match/filters:
+
+-mc → Match code (e.g., -mc 200,204)
+
+-fc → Filter code (ignore responses like -fc 404)
+
+-ml → Match length (e.g., -ml 100 matches response body length)
+
+-fl → Filter length
+
+-ms → Match string (e.g., -ms "Login")
+
+-fs → **Filter string`
+
+You can combine them to fine-tune results.
+
+
