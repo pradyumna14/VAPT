@@ -1,5 +1,99 @@
 Subdomain Takeover:
 
 
+🧠 What is Subdomain Takeover?
+A subdomain takeover happens when a subdomain (like blog.example.com) points to a service (like GitHub Pages or Heroku), but that service is no longer in use — but the DNS is still pointing to it.
+
+So you "take over" the subdomain by claiming the resource it points to.
+
+🏗️ Key Concepts (In Simple Terms)
+✅ Domain vs Subdomain
+example.com → main domain
+
+blog.example.com → subdomain
+
+✅ CNAME Record (Simplified)
+CNAME = Canonical Name
+It tells DNS to redirect a subdomain to another domain.
+
+Example:
+
+blog.example.com CNAME myoldsite.herokuapp.com
+So, when someone goes to blog.example.com, DNS says:
+
+Go to myoldsite.herokuapp.com
+
+🔥 When Does a Takeover Happen?
+A subdomain (blog.example.com) has a CNAME to an external service (myblog.github.io)
+
+But the target (myblog.github.io) doesn’t exist anymore
+
+You sign up for myblog.github.io (or same name on Heroku, etc.)
+
+DNS still points to it, so now blog.example.com points to you
+
+💥 You control a subdomain of a real website. Critical impact.
+
+🧪 Step-by-Step: Try to Take Over a Subdomain
+🧩 Step 1: Find Subdomains
+Free tool:
+
+subfinder -d example.com -o subs.txt
+Other tools: amass, assetfinder, crt.sh
+
+🧩 Step 2: Check for CNAME Records
+Run:
+
+dig CNAME blog.example.com
+Or:
+
+host blog.example.com
+If you see:
+
+blog.example.com CNAME myblog.herokuapp.com.
+That’s your target 🎯
+
+🧩 Step 3: Visit the Subdomain
+If it says something like:
+
+No such app
+There's nothing here, yet.
+Repository not found.
+Then it's possibly vulnerable to takeover
+
+🧩 Step 4: Claim the Resource
+Let’s say the CNAME points to myblog.github.io:
+
+Go to GitHub
+
+Create a repo called myblog.github.io
+
+Add an index.html
+
+GitHub Pages will host it
+
+Now when people visit blog.example.com, they’ll see your page
+
+→ You took over their subdomain
+
+🧱 Services Commonly Affected
+Service	Sign of Takeover
+GitHub Pages	    404 with GitHub branding
+Heroku	            "No such app"
+AWS S3	             "NoSuchBucket"
+Azure             "Web app not found"
+Fastly	           "Unknown domain"
+Shopify	         "Sorry, this shop is currently unavailable."
+
+🔍 Free Tools to Automate This
+
+subzy
+nuclei + templates:
+
+nuclei -l subs.txt -t subdomain-takeover
+
+tko-subs
+subjack
+
 
 
